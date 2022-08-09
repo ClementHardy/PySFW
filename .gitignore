@@ -1,4 +1,5 @@
 *.npy
 *.ipynb
 *.pyc
-
+*.iml
+*.xml
