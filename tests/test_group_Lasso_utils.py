@@ -5,6 +5,10 @@ from sliding_frank_wolfe.group_Lasso_utils import JacRegGroupLasso
 from sliding_frank_wolfe.group_Lasso_utils import group_lasso_step
 from scipy.optimize import check_grad
 import numpy as np
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
 
 
 def test_objective_reg_group_lasso():

@@ -5,9 +5,12 @@ from sliding_frank_wolfe.tools import trunc_rank
 from sliding_frank_wolfe.tools import merge_function_Phi
 from scipy.spatial.distance import cdist
 from numpy import triu_indices
-
 import matplotlib.pyplot as plt
 import pytest
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
 
 
 def test_build_phi():

@@ -36,7 +36,7 @@ class optimSFW:
         function used to approximate the data.
 
     is_full_rank, bool
-        if is_full_rank = True, the matrix linear_coefficients of size (n,k) is of full rank.
+        if is_full_rank = True, the matrix linear_coefficients of size (n,k) is required to be of full rank.
 
     sparsity, int
         sparsity = k, the number of parametric functions found by the SFW algorithm to approximate the data.
@@ -110,7 +110,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
         are normalized with respect to the 2-norm.
 
     epsilon : float, must be non negative
-        epsilon is the tolerance for the stopping criteria in the Frank-Wolfe algorithm.
+        epsilon is the tolerance for the stopping criteria used in the Frank-Wolfe algorithm.
 
     max_iter : int,
         maximal number of Frank_Wolfe iterations allowed.
@@ -118,7 +118,9 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     step_mesh : float,
         step for the mesh on the parameter space over which the stopping criteria is checked.
 
-
+    positive : Bool,
+        if True the coefficients in the linear combination of parametric functions used to approximate the signals
+        are required to be non negative.
 
     Returns
     -------
@@ -144,8 +146,6 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     optimSFW.sparsity, int
         number of parametric functions used to approximate the n signals.
 
-    positive, Bool,
-        if True the coefficients in the linear combination are required to be non negative.
 
     """
 

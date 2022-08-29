@@ -13,7 +13,7 @@ from numpy import triu_indices
 def build_Phi(times,parameters, k, order_base, normalized,func):
     """
     Build a dictionary of k (normalized, if normalized = True) parametric functions discretized on p points (= len(times)) whose parameters
-    belong to the table parameters "parameters".
+    belong to the table of parameters "parameters".
 
     Parameters
     ----------
@@ -59,17 +59,17 @@ def build_Phi(times,parameters, k, order_base, normalized,func):
 
 def trunc_rank(A, rank='full'):
     """
+    This function returns a matrix that approximates a matrix A by keeping only the first eigenvalues (up to the rank-th) of A in the Singular Value
+    Decomposition (SVD). When rank is equal to 'full', it returns A.
     Parameters
     ----------
-    A, array, shape(n,k)
+    A : array, shape(n,k)
 
-    rank, int
+    rank : int
 
     Returns
     -------
-    This function returns a matrix that approximates A by keeping only the first eigenvalues (up to the rank-th) of A in the Singular Value
-    Decomposition (SVD). When rank is equal to 'full', it returns A.
-
+    A:  array, shape(n,k)
     """
     if rank != 'full':
         u, s, v = np.linalg.svd(A)

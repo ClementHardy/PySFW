@@ -2,6 +2,12 @@ from sliding_frank_wolfe.dictionary import expo
 from sliding_frank_wolfe.tools import build_Phi
 from sliding_frank_wolfe.SFW_algorithm import stop_condition
 import numpy as np
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+
 
 def test_stop_condition():
     n = 10
