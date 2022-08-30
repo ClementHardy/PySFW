@@ -29,7 +29,8 @@ def objective_eta(x, Y, times, normalized, func):
 
     Returns
     -------
-    the value of the objective function
+    float,
+        the value of the objective function
     '''
     values = func(x, times)
     if normalized:
@@ -49,7 +50,7 @@ def jac_eta(x,number_parameters, Y, times, normalized, func, deriv_func):
     number_parameters : int,
         must be equal to d.
     Y : array, shape(p,n)
-        array of n signals distretized on p points.
+        array of n signals discretized on p points.
     times : array, shape(p,)
         array of size p corresponding to the points over which the signals are discretized.
     normalized : bool,

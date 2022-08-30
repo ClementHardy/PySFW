@@ -47,7 +47,7 @@ def test_group_lasso_step():
         A = np.random.uniform(10, 20, (2, 2))
         data = np.dot(F, A.T)
         X0= np.random.uniform(-2, 2, (2, 2))
-        assert( np.allclose(group_lasso_step(data, times, X0, parameters, lbda, 0, True, expo), A))
+        assert( np.allclose(group_lasso_step(data, times, X0, parameters, lbda, 0, True, expo,False), A))
     #test 2
     parameters = np.array([[3, 4]])
     F = build_Phi(times, parameters, 1, 0, True, expo)
@@ -58,6 +58,6 @@ def test_group_lasso_step():
         data = np.dot(F, a.T)
         p, n  = data.shape
         X0 = np.array([[np.random.uniform(-2, 2)]])
-        solution = group_lasso_step(data, times, X0, parameters, lbda, 0, True, expo)[0,0]
+        solution = group_lasso_step(data, times, X0, parameters, lbda, 0, True, expo,False)[0,0]
         assert(np.abs(np.abs(2 * (1. / (p * n*lbda)) * np.inner(data.T- solution * F.T,F.T) ) -1 ) <  tolerance)
 

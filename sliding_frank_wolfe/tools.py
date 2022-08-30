@@ -13,7 +13,7 @@ from numpy import triu_indices
 def build_Phi(times,parameters, k, order_base, normalized,func):
     """
     Build a dictionary of k (normalized, if normalized = True) parametric functions discretized on p points (= len(times)) whose parameters
-    belong to the table of parameters "parameters".
+    belong to the array "parameters".
 
     Parameters
     ----------
@@ -65,7 +65,7 @@ def trunc_rank(A, rank='full'):
     ----------
     A : array, shape(n,k)
 
-    rank : int
+    rank : int,
 
     Returns
     -------

@@ -14,14 +14,14 @@ from scipy.optimize import Bounds
 @jit(nopython=True, fastmath=True)
 def objectiveFunc(values_parameter,index_parameter, A, parameters, data, times, order_base, normalized, func):
     '''
-    objective function of the nonlinear subproblem appearing in the SFW procedure.
+    This function computes the objective function of a nonlinear subproblem appearing in the SFW procedure.
 
     Parameters
     ----------
     values_parameter : array, shape(k,)
         initialization of the components of index "index_parameter" of the parameters of the k parametric functions.
 
-    index_parameter :  int,
+    index_parameter :  int between 0 and d-1,
         index of the dimension of the parameter space over which the optimization is performed. Must be inferior to
         the dimension d of the parameter space.
 
@@ -71,7 +71,7 @@ def JacObjectiveFunc(values_parameter,index_parameter, A,parameters, data, times
         initialization of the components of index "index_parameter" of the parameters of the k parametric functions to
         be optimized.
 
-    index_parameter :  int,
+    index_parameter :  int between 0 and d-1,
         index of the dimension of the parameter space (of dimension d) over which the optimization is performed.
 
     A : array, shape(n,k)
@@ -130,9 +130,9 @@ def JacObjectiveFunc(values_parameter,index_parameter, A,parameters, data, times
 
 def nlls_step_jac_decomp(data, times, A, parameters, order_base, bounds, normalized, func, deriv_func):
     '''
-    This function solves a nonlinear optimization problem appearing in the SFW algorithm.
+    This function solves a nonlinear optimization subproblem appearing in the SFW algorithm.
     The optimization is not performed on the k (number of parametric functions) * d (dimension of the parameter space)
-    parameters. Indeed, it is performed successively on the dimension of the parameter space.
+    parameters. Indeed, it is performed successively on each dimension of the parameter space.
     Parameters
     ----------
     data : array, shape (p,n)
@@ -141,8 +141,9 @@ def nlls_step_jac_decomp(data, times, A, parameters, order_base, bounds, normali
     times : array, shape(p,)
         array of size p corresponding to the points over which the signals are discretized.
 
-    A : array of size (n,k) corresponding to the linear
-        coefficients in the mixture of  k parametric functions used to approximate the n signals.
+    A : array, shape(n,k)
+    array corresponding to the linear coefficients in the mixture of  k parametric functions used to approximate
+    the n signals.
 
     parameters :  array, shape(k,d)
         parameters of the k parametric functions. Each parametric function is parametrized by a parameter of dimension d.
@@ -167,7 +168,9 @@ def nlls_step_jac_decomp(data, times, A, parameters, order_base, bounds, normali
 
     Returns
     -------
-
+    new_parameters : array, shape(k,d)
+        new parameters of the k parametric functions. Each parametric function is parametrized by a parameter of
+        dimension d.
     '''
     number_parameters = parameters.shape[1]
     new_parameters = parameters.copy()

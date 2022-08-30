@@ -22,7 +22,7 @@ def cauchy(parameters, x):
 
     Parameters
     ----------
-    parameters : array, shape(d,)
+    parameters : array, shape(d=2,)
         parameters of the Cauchy function. The first coordinate corresponds to the location, the second coordinate
             corresponds to the scale.
     x : float or array of shape(p,)
@@ -30,8 +30,9 @@ def cauchy(parameters, x):
 
     Returns
     -------
-    values of the Cauchy function parametrized by the the coordinates of the array
-    "parameters" on the discretization points "x".
+    array, shape (p,)
+        values of the Cauchy function parametrized by the the coordinates of the array
+        "parameters" on the discretization points "x".
     '''
     b = parameters[0]
     c = parameters[1]
@@ -45,7 +46,7 @@ def derivCauchyB(parameters, x):
 
     Parameters
     ----------
-    parameters : array, shape(d,)
+    parameters : array, shape(d=2,)
         parameters of the Cauchy function. The first coordinate corresponds to the location, the second coordinate
             corresponds to the scale.
 
@@ -54,8 +55,9 @@ def derivCauchyB(parameters, x):
 
     Returns
     -------
-    values of the derivative of the Cauchy function parametrized by the coordinates of the array
-    "parameters" with respect to the location parameter (i.e parameters[0]) on the discretization points "x".
+    array, shape (p,)
+        values of the derivative of the Cauchy function parametrized by the coordinates of the array
+        "parameters" with respect to the location parameter (i.e parameters[0]) on the discretization points "x".
     '''
     b = parameters[0]
     c = parameters[1]
@@ -69,7 +71,7 @@ def derivCauchyC(parameters, x):
 
         Parameters
         ----------
-        parameters : array, shape(d,)
+        parameters : array, shape(d=2,)
             parameters of the Cauchy function. The first coordinate corresponds to the location, the second coordinate
                 corresponds to the scale.
 
@@ -78,8 +80,9 @@ def derivCauchyC(parameters, x):
 
         Returns
         -------
-        values of the derivative of the Cauchy function parametrized by the coordinates of the array
-        "parameters" with respect to the scale parameter (i.e parameters[1]) on the discretization points "x".
+        array, shape (p,)
+            values of the derivative of the Cauchy function parametrized by the coordinates of the array
+            "parameters" with respect to the scale parameter (i.e parameters[1]) on the discretization points "x".
         '''
     b = parameters[0]
     c = parameters[1]
@@ -93,7 +96,7 @@ def expo(parameters, x):
 
     Parameters
     ----------
-    parameters : array, shape(d,)
+    parameters : array, shape(d=2,)
         parameters of the parametric function. The first coordinate corresponds to the mean, the second coordinate
             corresponds to the standard deviation.
     x : float or array of shape(p,)
@@ -101,8 +104,9 @@ def expo(parameters, x):
 
     Returns
     -------
-    values of the Gaussian function parametrized by the the coordinates of the array
-    "parameters" on the discretization points "x".
+    array, shape (p,)
+        values of the Gaussian function parametrized by the the coordinates of the array
+        "parameters" on the discretization points "x".
     '''
     b = parameters[0]
     c = parameters[1]
@@ -116,7 +120,7 @@ def derivExpoB(parameters, x):
 
         Parameters
         ----------
-        parameters : array, shape(d,)
+        parameters : array, shape(d=2,)
             parameters of the parametric function. The first coordinate corresponds to the mean, the second coordinate
                 corresponds to the standard deviation.
 
@@ -125,8 +129,9 @@ def derivExpoB(parameters, x):
 
         Returns
         -------
-        values of the derivative of the Gaussian function parametrized by the the coordinates of the array
-        "parameters" with respect to the mean  (i.e parameters[0]) on the discretization points "x".
+        array, shape (p,)
+            values of the derivative of the Gaussian function parametrized by the the coordinates of the array
+            "parameters" with respect to the mean  (i.e parameters[0]) on the discretization points "x".
         '''
     b = parameters[0]
     c = parameters[1]
@@ -141,7 +146,7 @@ def derivExpoC(parameters, x):
 
             Parameters
             ----------
-            parameters : array, shape(d,)
+            parameters : array, shape(d=2,)
                 parameters of the parametric function. The first coordinate corresponds to the mean, the second coordinate
                     corresponds to the standard deviation.
 
@@ -150,8 +155,9 @@ def derivExpoC(parameters, x):
 
             Returns
             -------
-            values of the derivative of the Gaussian function parametrized by the the coordinates of the array
-            "parameters" with respect to the mean  (i.e parameters[1]) on the discretization points "x".
+            array, shape (p,)
+                values of the derivative of the Gaussian function parametrized by the the coordinates of the array
+                "parameters" with respect to the mean  (i.e parameters[1]) on the discretization points "x".
             '''
     b = parameters[0]
     c = parameters[1]
@@ -165,7 +171,7 @@ def derivExpo(index_parameter, parameters, x):
 
                 Parameters
                 ----------
-                parameters : array, shape(d,)
+                parameters : array, shape(d=2,)
                     parameters of the parametric function. The first coordinate corresponds to the mean, the second coordinate
                         corresponds to the standard deviation.
 
@@ -174,8 +180,9 @@ def derivExpo(index_parameter, parameters, x):
 
                 Returns
                 -------
-                values of the derivative of the Gaussian function parametrized by the the coordinates of the array
-                "parameters" with respect to "parameters[index_parameter]" on the discretization points "x".
+                array, shape (p,)
+                    values of the derivative of the Gaussian function parametrized by the the coordinates of the array
+                    "parameters" with respect to "parameters[index_parameter]" on the discretization points "x".
                 '''
     if index_parameter == 0:
         res = derivExpoB(parameters, x)
@@ -191,7 +198,7 @@ def derivCauchy(index_parameter, parameters, x):
 
                     Parameters
                     ----------
-                    parameters : array, shape(d,)
+                    parameters : array, shape(d=2,)
                         parameters of the parametric function. The first coordinate corresponds to the location, the second coordinate
                             corresponds to the scale.
 
@@ -200,8 +207,9 @@ def derivCauchy(index_parameter, parameters, x):
 
                     Returns
                     -------
-                    values of the derivative of the Cauchy function parametrized by the the coordinates of the array
-                    "parameters" with respect to "parameters[index_parameter]" on the discretization points "x".
+                    array, shape (p,)
+                        values of the derivative of the Cauchy function parametrized by the the coordinates of the array
+                        "parameters" with respect to "parameters[index_parameter]" on the discretization points "x".
                     '''
     if index_parameter == 0:
         res = derivCauchyB(parameters, x)

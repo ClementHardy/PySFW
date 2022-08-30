@@ -28,7 +28,7 @@ def objectiveRegGroupLasso(x, data, F, lbda, order_base):
 
     Returns
     -------
-    float
+    float,
         value of the objective function of the group-Lasso problem.
 
     '''

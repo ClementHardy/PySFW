@@ -32,8 +32,8 @@ class optimSFW:
 
     history_norms_linear_parameters : array, shape(number_of_iterations,k)
         array that contains (when the parameters "threshold" and "merging_threshold" of the SFW algorithm are taken equal to zero)
-        the successive values of the 2-norms of the vectors of the n linear coefficients associated to the k-th parametric
-        function used to approximate the data.
+        the history of the 2-norm of the columns of the array "linear_coefficients"
+        after each Frank-Wolfe iteration.
 
     is_full_rank, bool
         if is_full_rank = True, the matrix linear_coefficients of size (n,k) is required to be of full rank.
@@ -80,12 +80,12 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
         upper_bounds on the parameters of the parametric functions. The k-th coordinate of the array "upper_bounds"
         corresponds to the upper_bound on the k-th dimension of the parameter.
 
-    func : callable
+    func : callable,
         parametric function giving the continuous dictionary over which the signals are decomposed
         func(parameters, x) -> float`, where "x" is either a float or an array of float, "parameters" is an array of
         shape (d,).
 
-    deriv_func : callable
+    deriv_func : callable,
         derivative of the parametric function "func" with respect to the parameter of index "index_parameter".
         deriv_func(index_parameter, parameters, x) -> float, where "x" is either a float or an array of float,
         "parameters" is an array of shape (d,).
@@ -126,11 +126,12 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     -------
     optimSFW object,
         optimSFW contains all the parameters and linear coefficients to approximate the n signal distretized on p points.
-        At the end of the optimization k parametric functions are used to approximate the data.
+        At the end of the optimization mixtures of  k parametric functions are used to approximate the data.
 
     optimSFW.linear_coefficients : array, shape (n,k)
         It corresponds to the linear coefficents in the linear combination of parametric functions used
-        to approximate the signals.
+        to approximate the n signals. linear_coefficients[i,j] corresponds to the linear coefficients associated to the
+        i-th signal and the j-th parametric function.
 
     optimSFW.parameters : array shape (k,d)
         array containing the d-dimensional parameters of the k parametric functions used to approximate the signals.
@@ -139,8 +140,8 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
         It contains the history of the value of the objective function after each iteration of the
         Frank-Wolfe algorithm.
 
-    optimSFW.history_norms_linear_parameters  : array shape (n, max_iter)
-        It contains the history of the 2-norm of the linear coefficients associated to each parametric function
+    optimSFW.history_norms_linear_parameters  : array shape (max_iter,k)
+        It contains the history of the 2-norm of the columns of the array "linear_coefficients"
         after each Frank-Wolfe iteration.
 
     optimSFW.sparsity, int
