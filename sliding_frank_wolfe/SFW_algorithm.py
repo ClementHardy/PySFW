@@ -58,8 +58,8 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
                  epsilon = 1e-4, max_iter = 100, step_mesh = 1e-1, positive = False):
 
     """
-    Run the sliding Frank-Wolfe algorithm on a set of n signals disctretized on p points. The signal are approximated by
-    linear combinations of parametric functions "func". The parametric functions are parametrized by d parameters.
+    Run the sliding Frank-Wolfe algorithm on a set of n signals disctretized on p points. The signals are approximated by
+    linear combinations of parametric functions "func". The parametric functions are parametrized by a parameter of dimension d.
 
     Parameters
     ----------
@@ -125,11 +125,11 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     Returns
     -------
     optimSFW object,
-        optimSFW contains all the parameters and linear coefficients to approximate the n signal distretized on p points.
+        optimSFW contains all the parameters and linear coefficients to approximate the n signals distretized on p points.
         At the end of the optimization mixtures of  k parametric functions are used to approximate the data.
 
     optimSFW.linear_coefficients : array, shape (n,k)
-        It corresponds to the linear coefficents in the linear combination of parametric functions used
+        It corresponds to the linear coefficents in the linear combinations of parametric functions used
         to approximate the n signals. linear_coefficients[i,j] corresponds to the linear coefficients associated to the
         i-th signal and the j-th parametric function.
 
@@ -137,7 +137,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
         array containing the d-dimensional parameters of the k parametric functions used to approximate the signals.
 
     optimSFW.iterations : array, shape (nb_ite,), where nb_ite corresponds to the number of Frank-Wolfe iterations used.
-        It contains the history of the value of the objective function after each iteration of the
+        It contains the history of the values of the objective function after each iteration of the
         Frank-Wolfe algorithm.
 
     optimSFW.history_norms_linear_parameters  : array shape (max_iter,k)
