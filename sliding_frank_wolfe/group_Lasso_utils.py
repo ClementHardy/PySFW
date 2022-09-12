@@ -83,7 +83,7 @@ def JacRegGroupLasso(x, Y, F, lbda, order_base):
 
 def regressionGroupLasso(X, Y, F, lbda, order_base, positive=False):
     '''
-    This function solve the goup-Lasso optimization problem.
+    This function solves the goup-Lasso optimization problem.
     Parameters
     ----------
     X : array, shape(n,k)

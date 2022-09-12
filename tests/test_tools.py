@@ -1,3 +1,8 @@
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
 import numpy as np
 from sliding_frank_wolfe.dictionary import expo
 from sliding_frank_wolfe.tools import build_Phi
@@ -7,10 +12,6 @@ from scipy.spatial.distance import cdist
 from numpy import triu_indices
 import matplotlib.pyplot as plt
 import pytest
-import os, sys
-parent_dir = os.path.abspath('..')
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
 
 
 def test_build_phi():
@@ -54,10 +55,10 @@ def test_merge_function_phi():
     upper_bounds = [20,20]
     B, new_parameters = merge_function_Phi(merging_threshold, A, parameters, times, lower_bounds, upper_bounds, True, expo)
     assert( B[0,2] == 4)
-    print(B)
-    print(new_parameters)
+    #print(B)
+    #print(new_parameters)
     F = build_Phi(times, new_parameters, 5, 0, True, expo)
-    print(cdist(np.transpose(F), np.transpose(F), 'minkowski', p=2))
+    #print(cdist(np.transpose(F), np.transpose(F), 'minkowski', p=2))
 
 
 test_merge_function_phi()

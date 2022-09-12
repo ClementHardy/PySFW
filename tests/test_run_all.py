@@ -1,0 +1,15 @@
+import test_adding_spikes_utils
+import test_tools
+import test_optimizer_utils
+import test_SFW_algorithm
+import test_group_Lasso_utils
+
+test_adding_spikes_utils.test_jac_eta()
+test_tools.test_build_phi()
+test_tools.test_merge_function_phi()
+test_tools.test_trunc_rank()
+test_optimizer_utils.test_jac_objective_func()
+test_SFW_algorithm.test_stop_condition()
+test_group_Lasso_utils.test_group_lasso_step()
+test_group_Lasso_utils.test_jac_reg_group_lasso()
+test_group_Lasso_utils.test_objective_reg_group_lasso()

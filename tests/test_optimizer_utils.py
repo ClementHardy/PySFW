@@ -1,3 +1,7 @@
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
 
 from sliding_frank_wolfe.optimizer_utils import objectiveFunc
 from sliding_frank_wolfe.optimizer_utils import  JacObjectiveFunc
@@ -8,10 +12,6 @@ import numpy as np
 from scipy.optimize import check_grad
 from scipy.optimize import approx_fprime
 import matplotlib.pyplot as plt
-import os, sys
-parent_dir = os.path.abspath('..')
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
 
 
 def test_jac_objective_func():
@@ -25,9 +25,8 @@ def test_jac_objective_func():
     A = np.ones((n, k))
     data = np.dot(F,A.T)
     tolerance = 1e-2
-    print(JacObjectiveFunc(np.array([20,10,5]), 0, A, parameters, data, times, 0, True, expo,
-                           derivExpo))
-    print(approx_fprime(np.array([20,10,5]), lambda x: objectiveFunc(x, 0, A, parameters, data, times, 0, True, expo), 1e-5))
+    #print(JacObjectiveFunc(np.array([20,10,5]), 0, A, parameters, data, times, 0, True, expo,derivExpo))
+    #print(approx_fprime(np.array([20,10,5]), lambda x: objectiveFunc(x, 0, A, parameters, data, times, 0, True, expo), 1e-5))
     for i in range(100):
         X0 = np.random.uniform(-20,20,k)
         # print(JacObjectiveFunc(X0, 0, A, parameters, data, times, 0, True, expo,

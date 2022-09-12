@@ -59,7 +59,7 @@ def build_Phi(times,parameters, k, order_base, normalized,func):
 
 def trunc_rank(A, rank='full'):
     """
-    This function returns a matrix that approximates a matrix A by keeping only the first eigenvalues (up to the rank-th) of A in the Singular Value
+    This function returns a matrix that approximates a matrix A by keeping only the first singular values (up to the rank-th) of A in the Singular Value
     Decomposition (SVD). When rank is equal to 'full', it returns A.
     Parameters
     ----------

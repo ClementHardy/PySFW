@@ -13,7 +13,7 @@ import numpy as np
 
 class optimSFW:
     """
-    object returned by the sliding Franck-Wolfe algorithm.
+    object returned by the sliding Frank-Wolfe algorithm.
 
     Attributes:
     --------
@@ -36,7 +36,7 @@ class optimSFW:
         after each Frank-Wolfe iteration.
 
     is_full_rank, bool
-        if is_full_rank = True, the matrix linear_coefficients of size (n,k) is required to be of full rank.
+        if is_full_rank = True, the matrix linear_coefficients of size (n,k) is of full rank.
 
     sparsity, int
         sparsity = k, the number of parametric functions found by the SFW algorithm to approximate the data.
@@ -55,7 +55,7 @@ class optimSFW:
 
 def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshold=1e-4,
                  merging_threshold=1e-4, rank="full", size_grids = None, normalized= True,
-                 epsilon = 1e-4, max_iter = 100, step_mesh = 1e-1, positive = False):
+                 epsilon = 1e-4, max_iter = 100, size_mesh = 1000, positive = False):
 
     """
     Run the sliding Frank-Wolfe algorithm on a set of n signals disctretized on p points. The signals are approximated by
@@ -115,8 +115,8 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     max_iter : int,
         maximal number of Frank_Wolfe iterations allowed.
 
-    step_mesh : float,
-        step for the mesh on the parameter space over which the stopping criteria is checked.
+    size_mesh : int,
+        number of points in the mesh on the parameter space over which the stopping criteria is checked.
 
     positive : Bool,
         if True the coefficients in the linear combination of parametric functions used to approximate the signals
@@ -126,7 +126,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     -------
     optimSFW object,
         optimSFW contains all the parameters and linear coefficients to approximate the n signals distretized on p points.
-        At the end of the optimization mixtures of  k parametric functions are used to approximate the data.
+        At the end of the optimization, mixtures of  k parametric functions are used to approximate the data.
 
     optimSFW.linear_coefficients : array, shape (n,k)
         It corresponds to the linear coefficents in the linear combinations of parametric functions used
@@ -155,7 +155,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     assert(threshold >= 0)
     assert (merging_threshold >= 0)
     assert(epsilon >= 0)
-    assert(step_mesh >=0)
+    assert(size_mesh >=0)
     number_parameters = len(lower_bounds) #this variable corresponds to the dimension of the parameter space : d
     bounds = np.zeros((number_parameters,2,max_iter)) #this table gathers the upper bounds and the lower bounds in one table
     for i in range(number_parameters):
@@ -174,7 +174,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     k_temp = 1 #initialization of the current number of parametric used to approximate the data
     A_temp = np.reshape(A[:, i], (n, k_temp))
     #FRANK-WOLFE ITERATIONS
-    while stop_condition(Residual,times,epsilon,reg, lower_bounds, upper_bounds,step_mesh, normalized, func) and i < max_iter:
+    while stop_condition(Residual,times,epsilon,reg, lower_bounds, upper_bounds,size_mesh, normalized, func) and i < max_iter:
         if i > 0:
             k_temp = parameters_temp.shape[0]
             F = build_Phi(times, parameters_temp, k_temp, 0, normalized, func) #build the current dictionary of parametric functions
@@ -228,7 +228,7 @@ def SFW(data, times, reg, lower_bounds, upper_bounds, func, deriv_func, threshol
     #coeffA = np.array(coeffA)
     return optimSFW(A_temp, parameters_temp, ite, coeffA)
 
-def stop_condition(residual,times,epsilon,reg, lower_bounds, upper_bounds,step_mesh, normalized, func):
+def stop_condition(residual,times,epsilon,reg, lower_bounds, upper_bounds,size_mesh, normalized, func):
     """
     Compute the stopping criteria used in the sliding Frank-Wolfe algorithm
 
@@ -255,8 +255,8 @@ def stop_condition(residual,times,epsilon,reg, lower_bounds, upper_bounds,step_m
         upper_bounds on the parameters of the parametric functions. The k-th coordinate of the array "upper_bounds"
         corresponds to the upper_bound on the k-th dimension of the parameter.
 
-    step_mesh : float,
-        step for the mesh on the parameter space over which the stopping criteria is checked.
+    size_mesh : int,
+        number of points in the mesh on the parameter space over which the stopping criteria is checked.
 
     normalized : bool
         if normalized == True, the parametric functions discretized on p points used to approximate the signals
@@ -279,7 +279,7 @@ def stop_condition(residual,times,epsilon,reg, lower_bounds, upper_bounds,step_m
     number_parameters = len(lower_bounds)
     grids = []
     for i in range(number_parameters):
-        grids.append(np.arange(lower_bounds[i], upper_bounds[i], step_mesh))
+        grids.append(np.linspace(lower_bounds[i], upper_bounds[i], size_mesh))
     meshgrid = np.meshgrid(*grids)
     flatten_meshgrid = []
     for j in range(len(meshgrid)):

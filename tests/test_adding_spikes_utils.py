@@ -1,3 +1,8 @@
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
 from sliding_frank_wolfe.adding_spikes_utils import jac_eta
 from sliding_frank_wolfe.adding_spikes_utils import objective_eta
 from sliding_frank_wolfe.adding_spikes_utils import locate_new_spike
@@ -8,10 +13,6 @@ import numpy as np
 from scipy.optimize import check_grad
 from scipy.optimize import approx_fprime
 import matplotlib.pyplot as plt
-import os, sys
-parent_dir = os.path.abspath('..')
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
 
 
 def test_jac_eta():
