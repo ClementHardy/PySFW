@@ -1,5 +1,8 @@
 *.npy
-*.ipynb
 *.pyc
 *.iml
 *.xml
+__pycache__/
+# PyCharm 
+.idea/
+.ipynb_checkpoints/
