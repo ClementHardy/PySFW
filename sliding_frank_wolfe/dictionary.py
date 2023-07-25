@@ -216,6 +216,15 @@ def derivCauchy(index_parameter, parameters, x):
     if index_parameter == 1:
         res = derivCauchyC(parameters, x)
     return res
+@jit(nopython=True)
+def expo_1D(parameters, x, scaling = 1):
+    b = parameters[0]
+    return np.exp(-1 * ((x - b) ** 2) / scaling ** 2)
 
+@jit(nopython=True)
+def derivExpo_1D(index_parameter, parameters, x, scaling = 1):
+    assert(index_parameter == 0)
+    b = parameters[0]
+    return 2 * (x - b) / (scaling ** 2) * np.exp(-1 * ((x - b) ** 2) / (scaling**2))
 
 
